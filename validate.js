@@ -1,19 +1,43 @@
-document.getElementById("regForm").addEventListener("submit", function(e) {
-    let name = document.getElementById("name").value.trim();
-    let age = document.getElementById("age").value;
-    let email = document.getElementById("email").value.trim();
-    let errorMsg = document.getElementById("errorMsg");
+document.getElementById("studentForm").addEventListener("submit", function(event) {
+  const name = document.getElementById("name").value.trim();
+  const gender = document.getElementById("gender").value;
+  const course = document.getElementById("course").value;
+  const mailid = document.getElementById("mailid").value.trim();
+  const password = document.getElementById("password").value;
 
-    errorMsg.textContent = "";
+  // Name check
+  if (name.length < 3) {
+    alert("Name must be at least 3 characters long.");
+    event.preventDefault();
+    return;
+  }
 
-    if (name.length < 3) {
-        errorMsg.textContent = "Name must be at least 3 characters.";
-        e.preventDefault();
-    } else if (age < 10 || age > 100) {
-        errorMsg.textContent = "Age must be between 10 and 100.";
-        e.preventDefault();
-    } else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-        errorMsg.textContent = "Enter a valid email address.";
-        e.preventDefault();
-    }
+  // Gender check
+  if (!gender) {
+    alert("Please select a gender.");
+    event.preventDefault();
+    return;
+  }
+
+  // Course check
+  if (!course) {
+    alert("Please select a course.");
+    event.preventDefault();
+    return;
+  }
+
+  // Email check
+  const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  if (!emailPattern.test(mailid)) {
+    alert("Please enter a valid email address.");
+    event.preventDefault();
+    return;
+  }
+
+  // Password check
+  if (password.length < 6) {
+    alert("Password must be at least 6 characters long.");
+    event.preventDefault();
+    return;
+  }
 });
